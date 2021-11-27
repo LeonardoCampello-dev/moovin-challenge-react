@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Desafio React.js Moovin",
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "start": "webpack serve --open",
     "commit": "git add .; git-cz",
     "husky:prepare": "husky install",
     "lint": "eslint ./",

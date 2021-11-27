@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+:root {
+  --gray-50: #f0efef;
+  --gray-100: #cec5c5;
+  --gray-700: #545454;
+  --gray-800: #494949;
+  --black: #0e1011;
+  --white: #fff;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+html,
+body {
+  min-height: 100vh;
+}
+
+body {
+  background-color: var(--gray-50);
+
+  display: flex;
+  flex-direction: column;
+
+  font-size: 1.6rem;
+}
+
+body,
+input,
+textarea,
+select,
+button {
+  font-family: 'Open Sans', sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
