@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Desafio React.js Moovin",
   "scripts": {
+    "start": "webpack-dev-server --open",
     "commit": "git add .; git-cz",
     "husky:prepare": "husky install",
     "lint": "eslint ./",
@@ -25,6 +26,7 @@
     "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
+    "clean-webpack-plugin": "^4.0.0",
     "commitizen": "^4.2.4",
     "eslint": "^8.3.0",
     "eslint-config-airbnb": "^19.0.1",
@@ -38,7 +40,10 @@
     "jest": "^27.3.1",
     "prettier": "^2.5.0",
     "ts-jest": "^27.0.7",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.2",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.6.0"
   },
   "dependencies": {
     "cz-conventional-changelog": "^3.3.0",
