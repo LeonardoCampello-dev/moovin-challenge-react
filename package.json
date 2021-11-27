@@ -2,7 +2,21 @@
   "name": "moovin-challenge",
   "version": "0.0.1",
   "description": "Desafio React.js Moovin",
-  "scripts": {},
+  "scripts": {
+    "commit": "git add .; git-cz",
+    "husky:prepare": "husky install"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "author": "Leonardo Campello",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
+    "commitizen": "^4.2.4",
+    "husky": "^7.0.4"
+  }
 }
