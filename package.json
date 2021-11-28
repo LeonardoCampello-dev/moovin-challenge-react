@@ -9,7 +9,8 @@
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
     "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
-    "test": "jest --passWithNoTests --no-cache --runInBand"
+    "test": "jest --passWithNoTests --no-cache --runInBand",
+    "test:watch": "jest --watch"
   },
   "config": {
     "commitizen": {
@@ -21,6 +22,7 @@
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
+    "@types/faker": "^5.5.9",
     "@types/jest": "^27.0.3",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
@@ -37,6 +39,7 @@
     "eslint-plugin-promise": "^5.1.1",
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-standard": "^5.0.0",
+    "faker": "^5.5.3",
     "husky": "^7.0.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.3.1",
@@ -52,6 +55,7 @@
     "webpack-dev-server": "^4.6.0"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "cz-conventional-changelog": "^3.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
