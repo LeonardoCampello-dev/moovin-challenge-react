@@ -3,7 +3,7 @@ import { HttpGetClient, HttpGetParams, HttpResponse } from '@/data/protocols/htt
 import axios, { AxiosResponse } from 'axios'
 
 export class AxiosHttpClient implements HttpGetClient {
-  async get(params: HttpGetParams): Promise<HttpResponse> {
+  async get (params: HttpGetParams): Promise<HttpResponse> {
     let axiosResponse: AxiosResponse
 
     try {
@@ -15,7 +15,7 @@ export class AxiosHttpClient implements HttpGetClient {
     return this.adapt(axiosResponse)
   }
 
-  private adapt(axiosResponse: AxiosResponse): HttpResponse {
+  private adapt (axiosResponse: AxiosResponse): HttpResponse {
     return {
       statusCode: axiosResponse.status,
       body: axiosResponse.data

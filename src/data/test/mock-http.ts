@@ -12,7 +12,7 @@ export class HttpGetClientSpy<R> implements HttpGetClient<R> {
     statusCode: HttpStatusCode.ok
   }
 
-  async get(params: HttpGetParams): Promise<HttpResponse<R>> {
+  async get (params: HttpGetParams): Promise<HttpResponse<R>> {
     this.url = params.url
 
     return this.response
