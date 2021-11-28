@@ -4,7 +4,7 @@ import { Header } from '../../components'
 
 import styles from './home.module.scss'
 
-export function Home() {
+export function Home(): JSX.Element {
   return (
     <>
       <Header />
