@@ -71,3 +71,47 @@ section.info {
     }
   }
 }
+
+@media (max-width: 768px) {
+  section.info {
+    border: none;
+
+    div {
+      width: 80%;
+      margin: 0 auto;
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  section.info {
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      .count {
+        text-align: center;
+      }
+
+      .pagination {
+        margin-top: 0.8rem;
+
+        flex-direction: row;
+
+        .pages {
+          flex-direction: row;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  section.info {
+    div {
+      width: 95%;
+    }
+  }
+}

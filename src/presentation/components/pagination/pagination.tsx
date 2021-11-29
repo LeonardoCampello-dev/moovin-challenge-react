@@ -11,7 +11,7 @@ type Props = {
   fetchPosts: (url?: string) => void
 }
 
-function makeAssetsPath (): {
+function makeAssetsPath(): {
   leftArrow: string
   rightArrow: string
 } {
@@ -23,7 +23,7 @@ function makeAssetsPath (): {
   }
 }
 
-export default function Pagination ({ postsCount, postsMetadata, fetchPosts }: Props): JSX.Element {
+export default function Pagination({ postsCount, postsMetadata, fetchPosts }: Props): JSX.Element {
   const { links, pages, page } = postsMetadata.pagination
 
   const assets = makeAssetsPath()
@@ -35,15 +35,15 @@ export default function Pagination ({ postsCount, postsMetadata, fetchPosts }: P
   const nextPages =
     page < pages ? generatePagesArray(page, Math.min(page + siblingsCount, pages)) : []
 
-  function generatePagesArray (from: number, to: number): number[] {
+  function generatePagesArray(from: number, to: number): number[] {
     return [...new Array(to - from)].map((_, index) => from + index + 1).filter((page) => page > 0)
   }
 
-  function fetchPage (url: string): void {
+  function fetchPage(url: string): void {
     fetchPosts(url)
   }
 
-  function renderPreviousPages (): JSX.Element[] | null {
+  function renderPreviousPages(): JSX.Element[] | null {
     if (previousPages.length > 0) {
       return previousPages.map((page) => (
         <span key={page} onClick={() => fetchPage(makeApiUrl(`posts?page=${page}`))}>
@@ -55,7 +55,7 @@ export default function Pagination ({ postsCount, postsMetadata, fetchPosts }: P
     }
   }
 
-  function renderNextPages (): JSX.Element[] | null {
+  function renderNextPages(): JSX.Element[] | null {
     if (nextPages.length > 0) {
       return nextPages.map((page) => (
         <span key={page} onClick={() => fetchPage(makeApiUrl(`posts?page=${page}`))}>
@@ -67,7 +67,7 @@ export default function Pagination ({ postsCount, postsMetadata, fetchPosts }: P
     }
   }
 
-  function renderArrow (url: string, arrow: 'left' | 'right'): JSX.Element {
+  function renderArrow(url: string, arrow: 'left' | 'right'): JSX.Element {
     return (
       <span
         className={arrow === 'left' ? styles.leftArrow : styles.rightArrow}
@@ -81,7 +81,7 @@ export default function Pagination ({ postsCount, postsMetadata, fetchPosts }: P
     )
   }
 
-  function renderFirstPage (): JSX.Element | null {
+  function renderFirstPage(): JSX.Element | null {
     if (page > 1 + siblingsCount) {
       return (
         <>
@@ -94,7 +94,7 @@ export default function Pagination ({ postsCount, postsMetadata, fetchPosts }: P
     }
   }
 
-  function renderLastPage (): JSX.Element | null {
+  function renderLastPage(): JSX.Element | null {
     if (page + siblingsCount < pages) {
       return (
         <>
