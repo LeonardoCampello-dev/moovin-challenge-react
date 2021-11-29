@@ -21,8 +21,8 @@
   height: 6.4rem;
   margin: 0.8rem;
   border-radius: 50%;
-  border: 0.6rem solid #0dbc4f;
-  border-color: #0dbc4f transparent #0dbc4f transparent;
+  border: 0.6rem solid var(--primary-color);
+  border-color: var(--primary-color) transparent var(--primary-color) transparent;
   animation: loader 1.2s linear infinite;
 }
 

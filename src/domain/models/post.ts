@@ -9,9 +9,9 @@ export type PostMetadata = {
   pagination: {
     limit: 20
     links: {
-      previous: null | string
+      previous: string
       current: string
-      next: null | string
+      next: string
     }
     page: number
     pages: number
