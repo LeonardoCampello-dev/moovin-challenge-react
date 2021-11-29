@@ -11,30 +11,22 @@ type Props = {
   fetchPosts: (url?: string) => void
 }
 
-function makeAssetsPath(): {
+function makeAssetsPath (): {
   leftArrow: string
-  righArrow: string
+  rightArrow: string
 } {
   const basePath = 'images/icons/'
 
   return {
     leftArrow: `${basePath}left-arrow.svg`,
-    righArrow: `${basePath}right-arrow.svg`
+    rightArrow: `${basePath}right-arrow.svg`
   }
 }
 
-export default function Pagination({ postsCount, postsMetadata, fetchPosts }: Props): JSX.Element {
+export default function Pagination ({ postsCount, postsMetadata, fetchPosts }: Props): JSX.Element {
   const { links, pages, page } = postsMetadata.pagination
 
   const assets = makeAssetsPath()
-
-  function generatePagesArray(from: number, to: number): number[] {
-    return [...new Array(to - from)].map((_, index) => from + index + 1).filter((page) => page > 0)
-  }
-
-  function fetchPreviousOrNextPage(url: string): void {
-    fetchPosts(url)
-  }
 
   const siblingsCount = 1
 
@@ -43,6 +35,78 @@ export default function Pagination({ postsCount, postsMetadata, fetchPosts }: Pr
   const nextPages =
     page < pages ? generatePagesArray(page, Math.min(page + siblingsCount, pages)) : []
 
+  function generatePagesArray (from: number, to: number): number[] {
+    return [...new Array(to - from)].map((_, index) => from + index + 1).filter((page) => page > 0)
+  }
+
+  function fetchPage (url: string): void {
+    fetchPosts(url)
+  }
+
+  function renderPreviousPages (): JSX.Element[] | null {
+    if (previousPages.length > 0) {
+      return previousPages.map((page) => (
+        <span key={page} onClick={() => fetchPage(makeApiUrl(`posts?page=${page}`))}>
+          {page}
+        </span>
+      ))
+    } else {
+      return null
+    }
+  }
+
+  function renderNextPages (): JSX.Element[] | null {
+    if (nextPages.length > 0) {
+      return nextPages.map((page) => (
+        <span key={page} onClick={() => fetchPage(makeApiUrl(`posts?page=${page}`))}>
+          {page}
+        </span>
+      ))
+    } else {
+      return null
+    }
+  }
+
+  function renderArrow (url: string, arrow: 'left' | 'right'): JSX.Element {
+    return (
+      <span
+        className={arrow === 'left' ? styles.leftArrow : styles.rightArrow}
+        onClick={() => fetchPage(url)}
+      >
+        <img
+          src={arrow === 'left' ? assets.leftArrow : assets.rightArrow}
+          alt={arrow === 'left' ? 'Página anterior' : 'Próxima página'}
+        />
+      </span>
+    )
+  }
+
+  function renderFirstPage (): JSX.Element | null {
+    if (page > 1 + siblingsCount) {
+      return (
+        <>
+          <span onClick={() => fetchPage(makeApiUrl('posts'))}>1</span>
+          {page > 2 + siblingsCount && <span className={styles.ellipsis}>...</span>}
+        </>
+      )
+    } else {
+      return null
+    }
+  }
+
+  function renderLastPage (): JSX.Element | null {
+    if (page + siblingsCount < pages) {
+      return (
+        <>
+          {page + 1 + siblingsCount < pages && <span className={styles.ellipsis}>...</span>}
+          <span onClick={() => fetchPage(makeApiUrl(`posts?page=${pages}`))}>{String(pages)}</span>
+        </>
+      )
+    } else {
+      return null
+    }
+  }
+
   return (
     <section className={styles.info}>
       <div>
@@ -50,61 +114,19 @@ export default function Pagination({ postsCount, postsMetadata, fetchPosts }: Pr
 
         <div className={styles.pagination}>
           <div className={styles.pages}>
-            {links.previous && (
-              <span
-                className={styles.leftArrow}
-                onClick={() => fetchPreviousOrNextPage(links.previous)}
-              >
-                <img src={assets.leftArrow} alt='Página anterior' />
-              </span>
-            )}
+            {links.previous && renderArrow(links.previous, 'left')}
 
-            {page > 1 + siblingsCount && (
-              <>
-                <span onClick={() => fetchPreviousOrNextPage(makeApiUrl('posts'))}>1</span>
-                {page > 2 + siblingsCount && <span className={styles.ellipsis}>...</span>}
-              </>
-            )}
+            {renderFirstPage()}
 
-            {previousPages.length > 0 &&
-              previousPages.map((page) => (
-                <span
-                  key={page}
-                  onClick={() => fetchPreviousOrNextPage(makeApiUrl(`posts?page=${page}`))}
-                >
-                  {page}
-                </span>
-              ))}
+            {renderPreviousPages()}
 
             <span className={styles.selected}>{String(page)}</span>
 
-            {nextPages.length > 0 &&
-              nextPages.map((page) => (
-                <span
-                  key={page}
-                  onClick={() => fetchPreviousOrNextPage(makeApiUrl(`posts?page=${page}`))}
-                >
-                  {page}
-                </span>
-              ))}
+            {renderNextPages()}
 
-            {page + siblingsCount < pages && (
-              <>
-                {page + 1 + siblingsCount < pages && <span className={styles.ellipsis}>...</span>}
-                <span onClick={() => fetchPreviousOrNextPage(makeApiUrl(`posts?page=${pages}`))}>
-                  {String(pages)}
-                </span>
-              </>
-            )}
+            {renderLastPage()}
 
-            {links.next && (
-              <span
-                className={styles.rightArrow}
-                onClick={() => fetchPreviousOrNextPage(links.next)}
-              >
-                <img src={assets.righArrow} alt='Próxima página' />
-              </span>
-            )}
+            {links.next && renderArrow(links.previous, 'right')}
           </div>
         </div>
       </div>

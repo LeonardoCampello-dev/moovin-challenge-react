@@ -18,7 +18,7 @@ type ApiResponse = {
   }
 }
 
-export function Home(): JSX.Element {
+export function Home (): JSX.Element {
   const axiosHttpClient = new AxiosHttpClient()
 
   const [loading, setLoading] = useState(true)
@@ -31,7 +31,7 @@ export function Home(): JSX.Element {
     void fetchPosts()
   }, [])
 
-  async function fetchPosts(url?: string): Promise<void> {
+  async function fetchPosts (url?: string): Promise<void> {
     setLoading(true)
 
     let response: ApiResponse
